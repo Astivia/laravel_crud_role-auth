@@ -21,7 +21,7 @@ use Inertia\Inertia;
 */
 
 //crud routes using controllers
-Route::middleware(['auth', 'hasPermission:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
     Route::resource('permissions', PermissionController::class);

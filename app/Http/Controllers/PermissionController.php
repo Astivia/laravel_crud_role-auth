@@ -8,6 +8,14 @@ use Inertia\Inertia;
 
 class PermissionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('hasPermission:permission-list')->only(['index', 'show']);
+        $this->middleware('hasPermission:permission-create')->only(['create', 'store']);
+        $this->middleware('hasPermission:permission-edit')->only(['edit', 'update']);
+        $this->middleware('hasPermission:permission-delete')->only(['destroy']);
+    }
+
     public function index()
     {
         $permissions = Permission::all();
