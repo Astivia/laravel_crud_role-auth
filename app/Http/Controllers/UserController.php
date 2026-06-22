@@ -102,6 +102,16 @@ class UserController extends Controller
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if ($user->email === 'admin@admin.com') {
+            if ($request->email !== 'admin@admin.com') {
+                return redirect()->back()->withErrors(['email' => 'No puedes cambiar el correo del administrador principal.']);
+            }
+            $adminRole = Role::where('name', 'admin')->first();
+            if ($adminRole && $request->role_id != $adminRole->id) {
+                return redirect()->back()->withErrors(['role_id' => 'No puedes quitarle el rol de administrador al administrador principal.']);
+            }
+        }
+
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -126,6 +136,11 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->email === 'admin@admin.com') {
+            return redirect()->route('users.index')->withErrors(['error' => 'No puedes eliminar al administrador principal.']);
+        }
+
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'Usuario eliminado exitosamente.');
