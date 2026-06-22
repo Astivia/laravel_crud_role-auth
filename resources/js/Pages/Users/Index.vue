@@ -26,12 +26,10 @@ const deleteUser = (id) => {
 
 <template>
     <Head title="Usuarios" />
-
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Usuarios</h2>
         </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <!-- Breadcrumb -->
