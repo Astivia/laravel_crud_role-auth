@@ -1,6 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Breadcrumb from '@/Components/Breadcrumb.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+
+const breadcrumbs = [
+    { label: 'Dashboard', href: route('dashboard') },
+    { label: 'Usuarios' }
+];
 
 const props = defineProps({
     users: {
@@ -20,14 +26,15 @@ const deleteUser = (id) => {
 
 <template>
     <Head title="Usuarios" />
-
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Gestión de Usuarios</h2>
         </template>
-
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <!-- Breadcrumb -->
+                <Breadcrumb :items="breadcrumbs" />
+
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-medium text-gray-900">Lista de Usuarios</h3>
