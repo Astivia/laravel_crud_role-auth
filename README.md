@@ -14,7 +14,7 @@ El proyecto está construido sobre una arquitectura moderna utilizando:
 
 Para mantener un historial de desarrollo limpio y organizado, este proyecto sigue un flujo de trabajo estructurado basado en las siguientes ramas:
 
-- **`main`**: Contiene el código de producción estable. Solo recibe fusiones (merges) desde la rama `release` cuando una versión está completamente probada.
+- **`master`**: Contiene el código de producción estable. Solo recibe fusiones (merges) desde la rama `release` cuando una versión está completamente probada.
 - **`develop`**: Es la rama principal de integración de desarrollo. Aquí se unifican todas las nuevas características antes de prepararlas para un lanzamiento.
 - **`feature/<nombre>`**: Ramas temporales creadas a partir de `develop` para trabajar en funcionalidades específicas (ej. `feature/controllers`, `feature/frontend`). Al finalizar, se fusionan de vuelta a `develop`.
 - **`release`**: Se crea a partir de `develop` cuando se agrupan suficientes características para una nueva versión. Aquí se realizan pruebas finales antes de fusionar hacia `master` y retroalimentar a `develop`.
