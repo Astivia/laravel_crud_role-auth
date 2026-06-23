@@ -66,10 +66,10 @@ const hiddenRolesCount = computed(() => Math.max(0, props.rolesList.length - 4))
                                 Has iniciado sesión exitosamente en el sistema de gestión. Selecciona una opción del menú para comenzar o utiliza los accesos directos a continuación.
                             </p>
                             
-                            <div v-if="user.role_names && user.role_names.includes('admin')" class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-4">
                                 
                                 <!-- Card 1: Usuarios -->
-                                <div class="border border-gray-100 rounded-2xl p-6 bg-white hover:shadow-xl transition-shadow relative overflow-hidden group flex flex-col">
+                                <div v-if="user.permission_names?.includes('user-list')" class="border border-gray-100 rounded-2xl p-6 bg-white hover:shadow-xl transition-shadow relative overflow-hidden group flex flex-col">
                                     <!-- Background watermark -->
                                     <div class="absolute -bottom-4 -right-4 text-gray-50 opacity-40 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500 pointer-events-none">
                                         <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path></svg>
@@ -93,7 +93,7 @@ const hiddenRolesCount = computed(() => Math.max(0, props.rolesList.length - 4))
                                 </div>
 
                                 <!-- Card 2: Roles -->
-                                <div class="border border-gray-100 rounded-2xl p-6 bg-white hover:shadow-xl transition-shadow relative overflow-hidden group flex flex-col">
+                                <div v-if="user.permission_names?.includes('role-list')" class="border border-gray-100 rounded-2xl p-6 bg-white hover:shadow-xl transition-shadow relative overflow-hidden group flex flex-col">
                                     <div class="absolute -bottom-4 -right-4 text-gray-50 opacity-40 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500 pointer-events-none">
                                         <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                                     </div>
@@ -122,7 +122,7 @@ const hiddenRolesCount = computed(() => Math.max(0, props.rolesList.length - 4))
                                 </div>
 
                                 <!-- Card 3: Permisos -->
-                                <div class="border border-gray-100 rounded-2xl p-6 bg-white hover:shadow-xl transition-shadow relative overflow-hidden group flex flex-col">
+                                <div v-if="user.permission_names?.includes('permission-list')" class="border border-gray-100 rounded-2xl p-6 bg-white hover:shadow-xl transition-shadow relative overflow-hidden group flex flex-col">
                                     <div class="absolute -bottom-4 -right-4 text-gray-50 opacity-40 group-hover:scale-110 group-hover:-translate-y-2 group-hover:-translate-x-2 transition-all duration-500 pointer-events-none">
                                         <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                                     </div>

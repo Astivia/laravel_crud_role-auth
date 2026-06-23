@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'user-create', 'description' => 'Crear usuarios'],
             ['name' => 'user-edit', 'description' => 'Editar usuarios'],
             ['name' => 'user-delete', 'description' => 'Eliminar usuarios'],
+            ['name' => 'user-assign-role', 'description' => 'Asignar roles a usuarios'],
             
             // Roles
             ['name' => 'role-list', 'description' => 'Ver lista de roles'],
