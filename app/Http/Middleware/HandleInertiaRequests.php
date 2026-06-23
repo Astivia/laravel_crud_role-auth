@@ -34,7 +34,12 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user() ? array_merge($request->user()->toArray(), [
                     'role_names' => $request->user()->roles->pluck('name'),
+                    'permission_names' => $request->user()->roles->flatMap->permissions->pluck('name')->unique()->values()->toArray(),
                 ]) : null,
+            ],
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
             ],
         ];
     }

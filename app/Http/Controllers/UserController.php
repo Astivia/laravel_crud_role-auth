@@ -63,7 +63,7 @@ class UserController extends Controller
         ]);
 
         // Asignamos el rol al usuario
-        if ($request->has('role_id')) {
+        if ($request->has('role_id') && auth()->user()->hasPermission('user-assign-role')) {
             $user->roles()->attach($request->role_id);
         }
 
@@ -89,6 +89,11 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::with('roles')->findOrFail($id);
+        
+        if ($user->email === 'admin@admin.com' && auth()->user()->email !== 'admin@admin.com') {
+            return redirect()->route('users.index')->withErrors(['error' => 'No tienes permiso para editar al administrador principal.']);
+        }
+
         $roles = Role::all();
         
         return Inertia::render('Users/Edit', [
@@ -104,6 +109,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        if ($user->email === 'admin@admin.com' && auth()->user()->email !== 'admin@admin.com') {
+            return redirect()->route('users.index')->withErrors(['error' => 'No tienes permiso para modificar al administrador principal.']);
+        }
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
@@ -115,7 +124,7 @@ class UserController extends Controller
                 return redirect()->back()->withErrors(['email' => 'No puedes cambiar el correo del administrador principal.']);
             }
             $adminRole = Role::where('name', 'admin')->first();
-            if ($adminRole && $request->role_id != $adminRole->id) {
+            if ($adminRole && $request->has('role_id') && $request->role_id != $adminRole->id) {
                 return redirect()->back()->withErrors(['role_id' => 'No puedes quitarle el rol de administrador al administrador principal.']);
             }
         }
@@ -131,7 +140,7 @@ class UserController extends Controller
             ]);
         }
 
-        if ($request->has('role_id')) {
+        if ($request->has('role_id') && auth()->user()->hasPermission('user-assign-role')) {
             $user->roles()->sync([$request->role_id]);
         }
 

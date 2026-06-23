@@ -80,6 +80,8 @@ const submit = () => {
                             <select
                                 id="role_id"
                                 v-model="form.role_id"
+                                :disabled="!$page.props.auth.user.permission_names?.includes('user-assign-role')"
+                                :class="{'bg-gray-100 cursor-not-allowed text-gray-500': !$page.props.auth.user.permission_names?.includes('user-assign-role')}"
                                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
                             >
                                 <option value="">Seleccione un rol</option>
@@ -87,6 +89,12 @@ const submit = () => {
                                     {{ role.name }}
                                 </option>
                             </select>
+                            <p v-if="!$page.props.auth.user.permission_names?.includes('user-assign-role')" class="mt-2 text-sm text-amber-600 font-medium flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                                No tienes permisos suficientes para modificar el rol de este usuario.
+                            </p>
                             <InputError class="mt-2" :message="form.errors.role_id" />
                         </div>
 
