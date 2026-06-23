@@ -21,7 +21,7 @@ use Inertia\Inertia;
 */
 
 //crud routes using controllers
-Route::middleware(['auth', 'hasPermission:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('roles', RolController::class);
     Route::resource('permissions', PermissionController::class);
@@ -32,7 +32,10 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Dashboard', [
+        'totalUsers' => \App\Models\User::count(),
+        'rolesList' => \App\Models\Role::select('name')->get(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -11,6 +11,14 @@ use Inertia\Inertia;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('hasPermission:user-list')->only(['index', 'show']);
+        $this->middleware('hasPermission:user-create')->only(['create', 'store']);
+        $this->middleware('hasPermission:user-edit')->only(['edit', 'update']);
+        $this->middleware('hasPermission:user-delete')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
