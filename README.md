@@ -24,19 +24,22 @@ Para mantener un historial de desarrollo limpio y organizado, este proyecto sigu
 Sigue estos pasos para levantar el proyecto en un entorno local:
 
 1. **Clonar el repositorio:**
-   bash
+   ```bash
    git clone https://github.com/Astivia/laravel_crud_role-auth.git
    cd laravel_crud_role-auth
+   ```
 
 2. **Instalar dependencias del Backend y Frontend:**
-   bash
+   ```bash
    composer install
    npm install
    npm run build
+   ```
 
 3. **Generar clave de aplicación**
-   bash
+   ```bash
    php artisan key:generate
+   ```
 
 4. **Configuración de Entorno:**
    Duplicar el archivo ".env.example" y renómbralo a ".env"
@@ -52,8 +55,9 @@ Sigue estos pasos para levantar el proyecto en un entorno local:
     ```
 
 5. **Ejecutar migraciones de base de datos:**
-   bash
+   ```bash
    php artisan migrate --seed
+   ```
 
 6. **Iniciar los servidores de desarrollo:**
     - **Laravel (Backend):** php artisan serve
